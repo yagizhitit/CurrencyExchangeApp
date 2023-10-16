@@ -11,8 +11,10 @@ struct ContentView: View {
     
    @State private var food = ""
     var foodArray = ["Milk", "Apples", "Sugar", "Eggs", "Oranges", "Potatoes", "Corn", "Bread"]
+    @StateObject private var countriesVM = CurrencyViewModel()
     @State private var country = ""
     @State private var presentPicker = false
+    @State private var tag: Int = 1
     
     var body: some View {
         ZStack {
@@ -22,8 +24,8 @@ struct ContentView: View {
                         .edgesIgnoringSafeArea(.all)
                     VStack {
                         Spacer()
-                        CustomPickerTextView(presentPicker: $presentPicker, fieldString: $food, placeholder: "Select a food item")
-                        TextField("Select Country", text: $country)
+                        CustomPickerTextView(presentPicker: $presentPicker, fieldString: $food, placeholder: "Select a food item", tag: $tag, selectedTag: 1)
+                        CustomPickerTextView(presentPicker: $presentPicker, fieldString: $country, placeholder: "Select a country", tag: $tag, selectedTag: 2)
                         Spacer()
                     }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
@@ -32,7 +34,11 @@ struct ContentView: View {
                 }
             }
             if presentPicker {
-                CustomPickerView(items: foodArray.sorted(), pickerField: $food, presentPicker: $presentPicker)
+                if tag == 1 {
+                    CustomPickerView(items: foodArray.sorted(), pickerField: $food, presentPicker: $presentPicker)
+                } else {
+                    CustomPickerView(items: countriesVM.countryNamesArray, pickerField: $country, presentPicker: $presentPicker)
+                }
             }
         }
     }
