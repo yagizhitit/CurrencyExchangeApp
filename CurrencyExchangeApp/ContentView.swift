@@ -8,17 +8,33 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+   @State private var food = ""
+    var foodArray = ["Milk", "Apples", "Sugar", "Eggs", "Oranges", "Potatoes", "Corn", "Bread"]
+    @State private var country = ""
+    @State private var presentPicker = false
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-            Button("Button title") {
-                print("Button tapped!")
+        ZStack {
+            NavigationView {
+                ZStack {
+                    Color("Background")
+                        .edgesIgnoringSafeArea(.all)
+                    VStack {
+                        Spacer()
+                        CustomPickerTextView(presentPicker: $presentPicker, fieldString: $food, placeholder: "Select a food item")
+                        TextField("Select Country", text: $country)
+                        Spacer()
+                    }
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .frame(width: 250)
+                    .navigationBarTitle("Picker Demo")
+                }
+            }
+            if presentPicker {
+                CustomPickerView(items: foodArray.sorted(), pickerField: $food, presentPicker: $presentPicker)
             }
         }
-        .padding()
     }
 }
 
@@ -27,3 +43,5 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
