@@ -15,6 +15,11 @@ struct CustomPickerTextView: View {
     var selectedTag: Int
     var body: some View {
         TextField(placeholder, text: $fieldString).disabled(true)
+            .font(.system(size: 22))
+            .padding(.bottom,20)
+            .padding(.leading, 20)
+            .padding(.trailing, 20)
+            .frame(width: 400, height: 80)
             .overlay(
                 Button(action: {
                     tag = selectedTag

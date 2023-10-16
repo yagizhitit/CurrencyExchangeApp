@@ -47,7 +47,8 @@ struct CustomPickerView: View {
                     .foregroundColor(.white)
                     TextField("Filter by entering text", text: filterBinding)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
+                        .padding(.top, 10)
+                        .padding(.horizontal, 20)
                     List {
                         ForEach(filteredItems, id: \.self) { item in
                             Button(action: {
@@ -80,11 +81,11 @@ struct CustomPickerView: View {
     fileprivate func setHeight() {
         withAnimation {
             if filteredItems.count > 5 {
-                frameHeight = 400
+                frameHeight = 450
             } else if filteredItems.count == 0 {
-                frameHeight = 130
+                frameHeight = 150
             } else {
-                frameHeight = CGFloat(filteredItems.count * 45 + 130)
+                frameHeight = CGFloat(filteredItems.count * 50 + 150)
             }
         }
     }
