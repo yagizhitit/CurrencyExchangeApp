@@ -10,7 +10,12 @@ import Foundation
 struct Currency: Identifiable, Codable {
     var id: UUID? = UUID()
     let name: String
-//    let code: String
     let flag: String
-//    let appStore: Bool
+    let currency: CurrencyDetail
+}
+
+struct CurrencyDetail: Codable {
+    let code: String?
+    let name: String?
+    //let symbol: String?
 }
