@@ -53,7 +53,7 @@ struct ContentView: View {
                             }
                             
                             Button(action: {
-                                
+                                fetchAPIData()
                             }) {
                                 Image(systemName: "arrow.up.arrow.down.circle.fill")
                                     .font(.largeTitle)
@@ -92,6 +92,34 @@ struct ContentView: View {
             }
         }
     }
+}
+
+func fetchAPIData() {
+    var semaphore = DispatchSemaphore (value: 0)
+
+    // Örnek URL, bu URL'yi doğru değerlerle değiştirmeniz gerekebilir.
+    let urlString = "https://api.apilayer.com/exchangerates_data/latest?symbols=EUR&base=USD"
+
+    if let validURL = URL(string: urlString) {
+        var request = URLRequest(url: validURL, timeoutInterval: Double.infinity)
+        request.httpMethod = "GET"
+        request.addValue("3rYeJF1etcelsHMG9BKriNI5VX0yW1s7", forHTTPHeaderField: "apikey")
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                print(String(describing: error))
+                return
+            }
+            print(String(data: data, encoding: .utf8)!)
+            semaphore.signal()
+        }
+
+        task.resume()
+        semaphore.wait()
+    } else {
+        print("Geçersiz URL")
+    }
+
 }
 
 
