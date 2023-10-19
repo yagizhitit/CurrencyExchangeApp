@@ -10,6 +10,8 @@ import Foundation
 class CurrencyViewModel: NSObject, ObservableObject {
     
     @Published var currencies = [Currency]()
+    @Published var finalCurValue : String = ""
+    @Published var inputValue : String = ""
     @Published var exchangeRates: [String: Double] = [:]
     
     var onExchangeRatesUpdated: (() -> Void)?
@@ -18,7 +20,7 @@ class CurrencyViewModel: NSObject, ObservableObject {
         let uniqueCurrencies = Array(Set(currencies.map { "\($0.flag) \($0.name) (\($0.currency.code ?? "Unknown"))" }))
         return uniqueCurrencies.sorted()
     }
-
+    
     override init() {
         currencies = Store.retrieveCountries()
         super.init()
@@ -28,23 +30,23 @@ class CurrencyViewModel: NSObject, ObservableObject {
     func fetchInitialExchangeRates() {
         let nonOptionalCurrencyCodes = self.currencies.compactMap { $0.currency.code }
         let urlString = "https://api.apilayer.com/exchangerates_data/latest?symbols=\(nonOptionalCurrencyCodes.joined(separator: ","))&base=USD"
-        fetchExchangeRates(from: urlString)
+        //fetchExchangeRates(from: urlString)
     }
-
+    
     func getExchangeRate(from baseCurrency: String, to targetCurrency: String) -> Double? {
         return exchangeRates["\(baseCurrency)_\(targetCurrency)"]
     }
     
     func fetchSpecificExchangeRate(baseCurrency: String, targetCurrency: String) {
         let urlString = "https://api.apilayer.com/exchangerates_data/latest?symbols=\(targetCurrency)&base=\(baseCurrency)"
-        fetchExchangeRates(from: urlString)
+        fetchExchangeRates(from: urlString, baseCode: baseCurrency, targetCode: targetCurrency)
     }
     
     func getCurrentRate(for currencyCode: String) -> Double? {
         return exchangeRates[currencyCode]
     }
     
-    private func fetchExchangeRates(from urlString: String) {
+    private func fetchExchangeRates(from urlString: String, baseCode: String, targetCode: String) {
         guard let url = URL(string: urlString) else {
             print("Invalid URL.")
             return
@@ -52,7 +54,7 @@ class CurrencyViewModel: NSObject, ObservableObject {
         
         var request = URLRequest(url: url, timeoutInterval: Double.infinity)
         request.httpMethod = "GET"
-        request.addValue("3rYeJF1etcelsHMG9BKriNI5VX0yW1s7", forHTTPHeaderField: "apikey")  // Not: API anahtarınızı bu şekilde saklamamanızı öneririm!
+        request.addValue("YOUR_API_KEY", forHTTPHeaderField: "apikey")
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
@@ -64,7 +66,11 @@ class CurrencyViewModel: NSObject, ObservableObject {
                 let decodedResponse = try JSONDecoder().decode(ExchangeRateResponse.self, from: data)
                 DispatchQueue.main.async {
                     self.exchangeRates = decodedResponse.rates
-                    self.onExchangeRatesUpdated?()
+                    if let rate = self.getCurrentRate(for: targetCode),
+                       let inputNumber = Double(self.inputValue) {
+                        self.finalCurValue = String(format: "%.2f", inputNumber * rate)
+                    }
+                    //self.onExchangeRatesUpdated?()
                 }
             } catch {
                 print("Error decoding JSON: \(error.localizedDescription)")
@@ -84,4 +90,3 @@ class CurrencyViewModel: NSObject, ObservableObject {
 struct ExchangeRateResponse: Codable {
     let rates: [String: Double]
 }
-

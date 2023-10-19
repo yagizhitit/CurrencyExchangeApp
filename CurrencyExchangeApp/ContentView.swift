@@ -41,12 +41,12 @@ struct ContentView: View {
         let urlString = "https://api.apilayer.com/exchangerates_data/latest?symbols=\(targetCode)&base=\(baseCode)"
         print("Generated URL: \(urlString)")
         
-        if let rate = countriesVM.getCurrentRate(for: targetCode),
-           let inputNumber = Double(numberInput1) {
-            numberInput2 = String(format: "%.2f", inputNumber * rate)
-        } else {
-            countriesVM.fetchSpecificExchangeRate(baseCurrency: baseCode, targetCurrency: targetCode)
-        }
+        countriesVM.fetchSpecificExchangeRate(baseCurrency: baseCode, targetCurrency: targetCode)
+        
+//        if let rate = countriesVM.getCurrentRate(for: targetCode),
+//           let inputNumber = Double(numberInput1) {
+//            numberInput2 = String(format: "%.2f", inputNumber * rate)
+        //}
     }
 
 
@@ -61,7 +61,8 @@ struct ContentView: View {
                         Spacer()
                         
                         VStack {
-                            TextField("Enter the amount", text: $numberInput1)
+                            TextField("Enter the amount", text: $countriesVM.inputValue)
+                                .keyboardType(.numberPad)
                                 .textFieldStyle(.plain)
                                 .frame(width: 350, height: 50)
                                 .multilineTextAlignment(.trailing)
@@ -75,7 +76,7 @@ struct ContentView: View {
                         }
                         
                         VStack {
-                            TextField("", text: $numberInput2)
+                            TextField("", text: $countriesVM.finalCurValue)
                                 .textFieldStyle(.plain)
                                 .frame(width: 350, height: 50)
                                 .multilineTextAlignment(.trailing)
