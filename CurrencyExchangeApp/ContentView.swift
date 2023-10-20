@@ -62,6 +62,7 @@ struct ContentView: View {
                         
                         VStack {
                             TextField("Enter the amount", text: $countriesVM.inputValue)
+                                .foregroundColor(.white)
                                 .keyboardType(.numberPad)
                                 .textFieldStyle(.plain)
                                 .frame(width: 350, height: 50)
@@ -77,6 +78,7 @@ struct ContentView: View {
                         
                         VStack {
                             TextField("", text: $countriesVM.finalCurValue)
+                                .foregroundColor(.white)
                                 .textFieldStyle(.plain)
                                 .frame(width: 350, height: 50)
                                 .multilineTextAlignment(.trailing)
@@ -94,11 +96,11 @@ struct ContentView: View {
                         Button(action: {
                             convertCurrency()
                         }) {
-                            Text("Calculate")
+                            Text("Convert")
                                 .font(.title2)
                                 .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
+                                .background(Color.white)
+                                .foregroundColor(Color("backgroundColor"))
                                 .cornerRadius(10)
                         }
                         .padding(.bottom)
