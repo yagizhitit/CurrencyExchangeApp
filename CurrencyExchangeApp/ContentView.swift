@@ -76,6 +76,25 @@ struct ContentView: View {
 
                         }
                         
+                        HStack {
+                            Rectangle()
+                                .fill(Color.white)
+                                .frame(width: 280, height: 2)
+                            
+                            Button(action: {
+                            }) {
+                                Image(systemName: "arrow.up.arrow.down.circle.fill")
+                                    .resizable()
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(.white)
+                            }
+                            .padding(.leading, 20)
+                            
+                            Spacer()
+                        }
+                        .padding()
+
+
                         VStack {
                             TextField("", text: $countriesVM.finalCurValue)
                                 .foregroundColor(.white)
@@ -97,6 +116,7 @@ struct ContentView: View {
                             convertCurrency()
                         }) {
                             Text("Convert")
+                                .frame(width: 200)
                                 .font(.title2)
                                 .padding()
                                 .background(Color.white)
