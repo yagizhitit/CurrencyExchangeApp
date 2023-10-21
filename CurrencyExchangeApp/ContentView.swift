@@ -27,7 +27,7 @@ struct ContentView: View {
         let code = components[1].trimmingCharacters(in: CharacterSet(charactersIn: " )"))
         return code
     }
-
+    
     func convertCurrency() {
         guard let baseCode = countriesVM.getCodeForCountry(selectedCountry1),
               let targetCode = countriesVM.getCodeForCountry(selectedCountry2) else {
@@ -43,12 +43,19 @@ struct ContentView: View {
         
         countriesVM.fetchSpecificExchangeRate(baseCurrency: baseCode, targetCurrency: targetCode)
         
-//        if let rate = countriesVM.getCurrentRate(for: targetCode),
-//           let inputNumber = Double(numberInput1) {
-//            numberInput2 = String(format: "%.2f", inputNumber * rate)
+        //        if let rate = countriesVM.getCurrentRate(for: targetCode),
+        //           let inputNumber = Double(numberInput1) {
+        //            numberInput2 = String(format: "%.2f", inputNumber * rate)
         //}
     }
-
+    
+    func switchCurrencies() {
+        if !selectedCountry1.isEmpty && !selectedCountry2.isEmpty {
+            let temp = selectedCountry1
+            selectedCountry1 = selectedCountry2
+            selectedCountry2 = temp
+        }
+    }
 
     
     var body: some View {
@@ -58,6 +65,13 @@ struct ContentView: View {
                     Color("Background")
                         .edgesIgnoringSafeArea(.all)
                     VStack {
+                        
+                        Text("Currency Exchange")
+                            .font(.title2)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                        
+                        
                         Spacer()
                         
                         VStack {
@@ -73,7 +87,7 @@ struct ContentView: View {
                                 .frame(width: 350)
                             
                             CustomPickerTextView(presentPicker: $presentPicker1, fieldString: $selectedCountry1, placeholder: "Select a currency", tag: $tag, selectedTag: 1)
-
+                            
                         }
                         
                         HStack {
@@ -82,6 +96,7 @@ struct ContentView: View {
                                 .frame(width: 280, height: 2)
                             
                             Button(action: {
+                                switchCurrencies()
                             }) {
                                 Image(systemName: "arrow.up.arrow.down.circle.fill")
                                     .resizable()
@@ -93,8 +108,8 @@ struct ContentView: View {
                             Spacer()
                         }
                         .padding()
-
-
+                        
+                        
                         VStack {
                             TextField("", text: $countriesVM.finalCurValue)
                                 .foregroundColor(.white)
@@ -107,7 +122,7 @@ struct ContentView: View {
                                 .frame(width: 350)
                             
                             CustomPickerTextView(presentPicker: $presentPicker2, fieldString: $selectedCountry2, placeholder: "Select a currency", tag: $tag, selectedTag: 2)
-
+                            
                         }
                         
                         Spacer()
@@ -128,7 +143,7 @@ struct ContentView: View {
                     }
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .frame(width: 250)
-                    .navigationBarTitle("Currency Exchange", displayMode: .inline)
+                    //                    .navigationBarTitle("Currency Exchange", displayMode: .inline)
                 }
                 .background(Color("backgroundColor"))
             }
@@ -146,3 +161,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
