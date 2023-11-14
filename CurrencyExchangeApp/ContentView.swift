@@ -55,6 +55,14 @@ struct ContentView: View {
             selectedCountry1 = selectedCountry2
             selectedCountry2 = temp
         }
+        
+        if !countriesVM.finalCurValue.isEmpty && !countriesVM.inputValue.isEmpty {
+                let tempValue = countriesVM.inputValue
+            countriesVM.inputValue = countriesVM.finalCurValue
+            countriesVM.finalCurValue = tempValue
+            print("New number1: \(countriesVM.inputValue)")
+            print("New number2: \(countriesVM.finalCurValue)")
+            }
     }
 
     
@@ -96,7 +104,7 @@ struct ContentView: View {
                                 .frame(width: 280, height: 2)
                             
                             Button(action: {
-                                switchCurrencies()
+                                self.switchCurrencies()
                             }) {
                                 Image(systemName: "arrow.up.arrow.down.circle.fill")
                                     .resizable()
@@ -112,6 +120,7 @@ struct ContentView: View {
                         
                         VStack {
                             TextField("", text: $countriesVM.finalCurValue)
+                                .disabled(true)
                                 .foregroundColor(.white)
                                 .textFieldStyle(.plain)
                                 .frame(width: 350, height: 50)

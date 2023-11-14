@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B20C2D82B03073E00675012 /* finalCountries.json in Resources */ = {isa = PBXBuildFile; fileRef = 6B20C2D72B03073E00675012 /* finalCountries.json */; };
 		6BD581802ADC920F00F25A7D /* CurrencyExchangeAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD5817F2ADC920F00F25A7D /* CurrencyExchangeAppApp.swift */; };
 		6BD581822ADC920F00F25A7D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD581812ADC920F00F25A7D /* ContentView.swift */; };
 		6BD581842ADC921000F25A7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BD581832ADC921000F25A7D /* Assets.xcassets */; };
@@ -14,13 +15,13 @@
 		6BD5818F2ADCA79300F25A7D /* CustomPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD5818E2ADCA79300F25A7D /* CustomPickerView.swift */; };
 		6BD581922ADCB2C000F25A7D /* CustomPickerTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD581912ADCB2C000F25A7D /* CustomPickerTextView.swift */; };
 		6BD581952ADCB3CB00F25A7D /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD581942ADCB3CB00F25A7D /* Currency.swift */; };
-		6BD581972ADCBAAB00F25A7D /* finalCountries.json in Resources */ = {isa = PBXBuildFile; fileRef = 6BD581962ADCBAAA00F25A7D /* finalCountries.json */; };
 		6BD581992ADD4E7A00F25A7D /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD581982ADD4E7A00F25A7D /* Store.swift */; };
 		6BD5819B2ADD4FDF00F25A7D /* CurrencyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD5819A2ADD4FDF00F25A7D /* CurrencyViewModel.swift */; };
 		6BD581A02AE0290C00F25A7D /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 6BD5819F2AE0290C00F25A7D /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B20C2D72B03073E00675012 /* finalCountries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = finalCountries.json; path = "../../../../../Documents/Projects/JSON  Combiner/finalCountries.json"; sourceTree = "<group>"; };
 		6BD5817C2ADC920F00F25A7D /* CurrencyExchangeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CurrencyExchangeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BD5817F2ADC920F00F25A7D /* CurrencyExchangeAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyExchangeAppApp.swift; sourceTree = "<group>"; };
 		6BD581812ADC920F00F25A7D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -29,7 +30,6 @@
 		6BD5818E2ADCA79300F25A7D /* CustomPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerView.swift; sourceTree = "<group>"; };
 		6BD581912ADCB2C000F25A7D /* CustomPickerTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPickerTextView.swift; sourceTree = "<group>"; };
 		6BD581942ADCB3CB00F25A7D /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
-		6BD581962ADCBAAA00F25A7D /* finalCountries.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = finalCountries.json; path = "../../../../JSON  Combiner/finalCountries.json"; sourceTree = "<group>"; };
 		6BD581982ADD4E7A00F25A7D /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		6BD5819A2ADD4FDF00F25A7D /* CurrencyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,7 +103,7 @@
 		6BD581932ADCB3A900F25A7D /* CurrencyFiles */ = {
 			isa = PBXGroup;
 			children = (
-				6BD581962ADCBAAA00F25A7D /* finalCountries.json */,
+				6B20C2D72B03073E00675012 /* finalCountries.json */,
 				6BD581942ADCB3CB00F25A7D /* Currency.swift */,
 				6BD581982ADD4E7A00F25A7D /* Store.swift */,
 				6BD5819A2ADD4FDF00F25A7D /* CurrencyViewModel.swift */,
@@ -176,7 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6BD581872ADC921000F25A7D /* Preview Assets.xcassets in Resources */,
-				6BD581972ADCBAAB00F25A7D /* finalCountries.json in Resources */,
+				6B20C2D82B03073E00675012 /* finalCountries.json in Resources */,
 				6BD581842ADC921000F25A7D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
